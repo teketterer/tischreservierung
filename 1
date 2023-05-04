@@ -1,0 +1,1080 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 }al//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+  <head><meta http-equiv="content-type" content="text/html; charset=utf-8" /><meta http-equiv="content-language" content="de" /><meta name="publisher" content="Seehotel Louise GmbH" /><meta name="publisher-email" content="info@seehotel-louise.de" /><meta name="language" content="de" /><meta name="generator" content="Swoppen Soferu" /><meta name="robots" content="" /><meta name="description" content="" /><meta name="keywords" content="" lang="de" xml:lang="de" /><meta name="title" content="Tischreservierung" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Tischreservierung</title><script type="text/javascript" src="/soferu/library/JS/jQuery//jquery-2.2.4.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" crossorigin="anonymous" /><link rel="stylesheet" type="text/css" media="screen" href="/soferu/templates/HP/online-reservierung3/styles/style.css" /><link href="/soferu/templates/HP/online-reservierung3/styles/gfonts.css" rel="stylesheet" type="text/css" /><link rel="stylesheet" href="/soferu/library/JS/bootstrap/bootstrap_3.3.7/css/bootstrap.min.css" /><script type="text/javascript" src="/soferu/library/JS/jQuery/jquery-ui/jquery-ui.js"></script><script type="text/javascript" src="/soferu/library/JS/jQuery/jquery.spinner.js"></script><link rel="stylesheet" type="text/css" media="screen" href="/soferu/templates/HP/online-reservierung3/styles/datepicker.css" /><script type="text/javascript" src="/soferu/library/JS/jQuery/jquery-ui/jquery-ui-timepicker.js"></script><script type="text/javascript" src="/soferu/library/JS/jQuery/jquery-ui/jquery-ui-i18n.js"></script><script type="text/javascript" src="/soferu/library/JS/jQuery/jquery-ui/jquery-ui-timepicker-i18n.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment-with-locales.min.js"></script><!--<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> --><script type="text/javascript" src="/soferu/templates/HP/online-reservierung3/js/daterange_calendar.mod.js?v=3"></script><link rel="stylesheet" type="text/css" media="screen" href="/soferu/templates/HP/online-reservierung3/styles/daterange_calendar.mod.css?v=25" /><link rel="stylesheet" type="text/css" media="screen" href="/soferu/templates/HP/online-reservierung3/styles/animate.css" /><link rel="stylesheet" type="text/css" media="screen" href="/soferu/templates/HP/online-reservierung3/styles/reservation.css" /><!-- HEADER--><link rel="stylesheet" type="text/css" href="/soferu/templates/HP/online-reservierung3/styles/normalize.css" /><!--<link rel="stylesheet" type="text/css" href="/{{const:HP_TEMPLATE_PATH}}styles/gm.css" />--><link rel="stylesheet" type="text/css" href="/soferu/templates/HP/online-reservierung3/styles/demo.css" /><link rel="stylesheet" type="text/css" href="/soferu/templates/HP/online-reservierung3/styles/component.css" /><!--<link rel="stylesheet" type="text/css" media="screen" href="/{{const:HP_TEMPLATE_PATH}}styles/bootflat.css?v=13" /> --><!-- HEADER--><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script><script src="/soferu/library/JS/bootstrap/bootstrap_3.3.7/js/bootstrap.min.js"></script><script type="text/javascript" src="/soferu/templates/HP/online-reservierung3/js/reservation_events.js"></script><script>
+          var hasGtag = 0;
+        </script><script type="text/javascript">
+
+        $(document).ready(function() {
+          $('#gn-menu a').on('click',function(){
+            if($(this).attr('href') != undefined && $(this).attr('href') != '') {
+              window.location.href = $(this).attr('href');
+            }
+          });
+          moment.locale('de');
+          if($('.item').length != 0) {
+            $('.item:first-child').addClass('active');
+          }
+
+          $.datepicker.setDefaults($.datepicker.regional["de".toLowerCase()]);
+
+          
+
+          if($('#OS .box#payment-types .box-content img').attr('src') == '')
+            $('#OS .box#payment-types .box-content img').hide();
+
+          $('#OS .status table tr:first-child').remove();
+          $('#OS .box#payment-types .box-content table tr td:first-child').css('width', '100px');
+
+          $('#OS .box#payment-types .box-content table .radio').on("click",function() {
+            $('#OS .box#payment-types .box-content table tr').removeClass('active');
+            $(this).parent().parent().addClass('active');
+          });
+
+        });
+
+        </script><style>
+            ul#gn-menu {
+              background: #fff;
+            }
+
+            .gn-icon-menu::before {
+              box-shadow: 0 3px #fff, 0 -6px #c09100, 0 -9px #fff, 0 -12px #c09100!important;
+            background:#c09100;
+            }
+
+            nav.gn-menu-wrapper {
+              background: #fff;
+            }
+            .loign-li a ,.hover-languages{
+              color:#c09100!important;
+            }
+
+            .gn-menu-main, .gn-menu-main ul {
+              background: #ffffffe3;
+            }
+          </style><style>
+          :root {
+            --light-grey: #dadada;
+            --white:#ffffff;
+            --primary-color:#5F6F81;
+            --hover-color:#e0eaf5;
+            --font-color:#405062;
+          }
+        </style><style>
+          :root {
+            --light-grey: #dadada;
+            --white:#ffffff;
+            --primary-color:#c09100;
+            --hover-color:#c09100b9;
+            --font-color:#405062;
+          }
+        </style><style>
+
+
+          .header {
+            width: 100%;
+            height: 40vh;
+            overflow: hidden;
+            float: left;
+            display: block;
+            margin-top: 50px;
+          }
+          img.logo.img-responsive {
+            min-width: 200px;
+            min-height: 200px;
+            width: auto;
+            position: absolute;
+            top: 33%;
+            height: 33%;
+            width: 33%;
+            margin-left: 33%;
+          }
+
+          .header {
+            position: relative;
+          }
+          .header img {
+            width: 100%;
+            height: auto;
+            object-fit: unset;
+          }
+
+
+          .category .category,.title-block {
+            background: #c09100;
+            color:white;
+          }
+          .clock-base {
+          border-color: #c09100!important;
+          }
+          .or-progress{
+          background:#c09100;
+          }
+          body {
+          color:#000;
+          }
+          .tmpl-header {
+          background:#fff;
+          }
+
+          .tmpl-content {
+          background:#3c4dced1;
+          margin-top:15px;
+          margin-bottom:15px;
+          }
+          .tmpl-content-dashboard {
+          background:#3c4dced1;
+          margin-top:15px;
+          margin-bottom:15px;
+          }
+          .tmpl-footer {
+            background:var(--primary-color);
+            width: 100%;
+            overflow: hidden;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            min-height: 20px;
+            padding: 15px;
+          }
+
+          td.is-active.in-range {
+          background: #c09100b5;
+          }
+          .ui-datepicker-header {
+          background-color:#c09100!important;
+          border-color:#c09100!important;
+          }
+          .ui-datepicker-today {
+          background: #c09100!important;
+          }
+
+          .btn-primary {
+          background-color:#c09100!important;
+          border-color:var(--primary-color)!important;
+          transition:all 0.3s ease-in;
+          opacity:1;
+
+          }
+
+          button.btn.btn-outline-primary.active {
+          background: #c09100!important;
+          color: white;
+          box-shadow: none;
+          }
+
+          .daterangepicker td.in-range {
+          background: #c091002b;
+
+          }
+
+          .item-box.active>i{
+          color: #c09100;
+          }
+
+          .btn-primary:hover {
+            opacity:1;
+            transition:all 0.3s ease-in;
+          }
+          .btn-default {
+          background-color:#c09100!important;
+          }
+          .jumbotron {
+            padding: 0px;
+            margin: 0px;
+          }
+
+          #footer {
+            width:100%;
+          }
+          .btn-default {
+          background-color: #c09100!important;
+          color: white;
+          }
+          .add_room:hover {
+          color: #c09100!important;
+          }
+          .overview-summary .title {
+          background: #c09100!important;
+          }
+          .room-info-btn {
+          background:#c091007a;
+          }
+          td.active.end-date.in-range.available.focused.is-active p,td.active.start-date.in-range.available.focused.is-active p,td.today.active.start-date.in-range.available.is-not-active.off.disabled.is-active {
+          background: #c09100!important;
+          }
+
+          a.btn.btn-primary.large.add_room {
+          color: #c09100!important;
+          }
+          .room-info-btn {
+          background: #c091007a!important;
+          }
+          .loader {
+          border-color:#c09100!important;
+          }
+          .container-scroll-step .text {
+            background:;
+          }
+          .input-group.number-spinner {
+            margin: 15px 20px;
+          background: #c09100;
+          padding: 20px;
+          }
+
+
+
+          /* MOVE LATER */
+
+          ul.gn-submenu.hover-languages {
+            display: none;
+          }
+
+          ul.gn-submenu.hover-languages li {
+            overflow: visible;
+            background: white!important;
+            height: auto;
+            width: 100%!important;
+          }
+
+          .gn-menu-main > li:last-child {
+            position: relative;
+          }
+
+          ul.gn-submenu.hover-languages {
+            position: absolute;
+            left: 0px;
+            right: 0px;
+            border-top: 1px solid #c6d0da;
+          }
+          ul.gn-submenu.hover-languages:hover {
+            display: block!important;
+          }
+          .login-container {
+            background: white;
+            padding: 20px;
+            min-width: 300px;
+            border-top: 1px solid #c6d0da;
+            display: none;
+            position:absolute;
+          }
+
+          header.tmpl-header {
+            z-index: 99999999999999999999999;
+          }
+
+          .or-box.col-md-12 {
+            z-index: 9!important;
+          }
+
+          .login-container * {
+            z-index: 99999999999999999999;
+          }
+
+          .login-container {}
+
+          .login-container label {
+            width: 100%;
+            height: auto!important;
+            display: block;
+            margin: 0px;
+          }
+
+          input.btn.btn-primary {}
+
+          .login-container {}
+
+          .login-container input.btn.btn-primary {
+            float: right;
+            margin-top: 15px;
+          }
+          .gn-menu-main {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            font-size: 13px;
+            z-index: 9999999;
+          }
+          .col-md-12.article {
+          border-bottom: 2px solid #c09100!important;
+          }
+          .ArticleCheckout .payment-container {
+            background: #bbbbbb!important;
+          }
+          .col-md-12.article.active,.person-box ,.col-md-12.article:hover ,.ArticleCheckout .on .payment-container{
+          background: #c09100!important;
+
+          }
+
+          .part-title {
+            font-size: 18px;
+            font-weight: bold;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+          border-bottom: 2px solid #c09100;
+          }
+
+          /* nav.gn-menu-wrapper {
+               -webkit-transform: translateX(0px);
+               -moz-transform: translateX(0px);
+               transform: translateX(0px);
+           }
+*/
+          ul#gn-menu {
+            border-bottom: 1px solid #c6d0da;
+          }
+
+          nav.gn-menu-wrapper.gn-open-all {
+            border-right: 1px solid #e7e7e7;
+            box-shadow: -3px 9px 11px 0px #00000082;
+          }
+          .gn-icon-menu::before {
+            margin-top: 35px;
+          }
+          .gn-icon-search::before {
+            margin-top: 20px;
+          }
+          .submenu-parent:before {
+            content: "\e007";
+            font-family: 'ecoicons';
+            position: absolute;
+            right: 30px;
+          }
+          ul.gn-submenu {
+            box-shadow: inset 0px 0px 4px 0px #000000d6;
+          }
+          .gn-submenu li a {
+            color: #5f6f81de;
+          }
+          .login-container {
+            box-shadow: 0px 2px 3px 0px #00000042;
+          }
+          @media screen and (max-width:991px) {
+            .gn-menu-main > li > a {
+              padding: 5px;
+            }
+            /*
+                   .gn-icon::before {
+                       width: 30px;
+                   }
+                   */
+            nav.gn-menu-wrapper {
+              width: 0px;
+            }
+
+            .gn-menu-main > li:last-child {
+              float: left;
+            }
+
+          }
+          .no-transition td.active.start-date,.no-transition td.active.end-date {
+            background: white!important;
+            transition: none!important;
+          }
+
+          .gn-menu-main a {
+            display: block;
+            height: auto;
+            color: #5f6f81;
+            text-decoration: none;
+            cursor: pointer;
+          }.swal2-popup {
+             font-size: 1.8rem!important;
+           }
+          .gn-icon-menu.gn-selected::before {
+            background: #C6D0DA !important;}
+
+
+        </style><style> .jumbotron {
+          padding: 0px;
+          margin: 0px;
+        }</style><script>
+
+
+$(document).ready(function(){
+
+$('.dashboard>.dash:nth-child(3) div').text('Hotelinformationen');
+
+$('.dashboard.HP_owncontent>div:nth-child(6)').html('<a href="https://seehotellouisetablet.jimdofree.com/restaurants/" class=" btn btn-primary"><i class="fas fa-utensils btn-icon"></i>Restaurants</a></div>');
+
+$('.gn-menu>li:nth-child(5)').html('<a class="gn-icon gn-icon-spoon-knife" href="https://seehotellouisetablet.jimdofree.com/restaurants/" target="_blank">Restaurants</a>')
+
+
+$('.HP-section.contact>.HP-section-title').append('<br><p style="font-size:14px;">Wir freuen uns über Ihre Fragen!<br>Schreiben Sie uns hier oder rufen Sie uns an unter: 033085 / 50 960</p>')
+
+
+$('.part-1').addClass('inactive');
+});
+</script>
+
+<style>
+
+body {
+    background: #ecdeb2!important;
+}
+.extras>div {
+    width: 100%;
+}
+.or-box.col-md-12.part-1.no-arr.active-code {
+    display: none;
+}
+.or-box.part-2x {
+    margin: 10% 0px 0px 0px;
+}
+
+</style>
+<style>
+.or-box, .or-box-title {
+border-color:#c09100!important;
+}
+.inclusive {
+display:none;
+}
+
+.logo {
+    position: absolute;
+    height: 153px;
+    left: 50%;
+    transform: translate(-50%);
+    padding: 15px;
+    /* border: 1px solid red; */
+    background: white;
+    box-shadow: 0px 3px 6px 0px #0006;
+    padding: 0px;
+    border: 1px solid #ecdeb2;
+    border-top: 0px;
+    padding: 10px;
+}
+img.img-logo.img-responsive {
+    max-height: 100%;
+    width: auto;
+}
+.part-3 .mb-6.col-md-.col-xs-6 {
+    width: 100%;
+}
+div#content {
+    float: left;
+    width: 100%;
+}
+select.form-control.anr {
+
+}
+
+.price-list-title, .price-list-content,.check_price_list span {
+    display: none!important;
+}
+
+.item-price-val {
+    right: unset;
+    left: 50%;
+    transform: translate(-50%);
+    font-weight: 500;
+}
+
+</style></head>
+  <body><header class="tmpl-header"><div class="header-bar"></div><div class="container"></div></header><div class="jumbotron"></div><main class="tmpl-content  container"><div id="content"><div class="HP-section"><div class="HP-section-title">Tischreservierung Seehotel Louise</div><div xmlns="http://www.w3.org/1999/xhtml" xmlns:file="swo.xml.file">
+  <script type="text/javascript">
+$(document).ready(function() {
+
+    $('#date').addClass('notranslate');
+  $('.available').on("click",function() {
+    
+    $('button.next').removeAttr('disbabled').addClass('btn-primary');
+    $('input[name=time]').val($(this).data('time'));
+    $('.timeslot').removeClass('active');
+    $(this).addClass('active');
+    
+    
+  });
+  
+  $('.dropdown-menu a').on("click",function() {
+    
+    $('.widget-persons').text($(this).text());
+    $('input[name=persons]').val($(this).data('num'));
+    $(this).closest('.num').find('.dropdown-toggle').text($(this).data('num') + ' Pers.');
+    
+    loadTimeSlots();
+    
+  });
+  
+  $('button.next').on("click",function() {
+    
+    if(!$(this).attr('disbabled')) {
+      
+      $('.widget-persons').text($('input[name="persons"]').val() + ' Personen');
+      $('.widget-date').text($('.date-value').text() + ' ' + $('input[name="time"]').val()  + ' Uhr');
+      
+      $('.booking-details').hide();
+      $('.contact-information').show();
+      
+    }
+    
+    
+  });
+  
+  
+  $('.back').on("click",function() {
+  
+    $('.contact-information').hide();
+    $('.booking-complete').hide();
+    $('.booking-details').show();
+    
+    loadTimeSlots();
+    
+  });
+  
+  
+  $('.dropdown-toggle').on("change",function() {
+    loadTimeSlots();
+  });
+  
+   $('.dropdown-toggle').ready(function() {
+    loadTimeSlots();
+  });
+  
+
+  var loadTimeSlots = function() {
+    
+    var dateText = $('input[name="date"]').val();
+    var personsText = $('input[name="persons"]').val();
+    if($('html').attr('lang') != 'de'){
+        dateText = moment(dateText, 'DD.MM.YYYY', true).format('YYYY-MM-DD');
+    }
+    $.get(window.location.pathname, {date: dateText, persons: personsText}, function(data) {
+
+        var data = jQuery.parseJSON(data);
+        var sumPersons = parseInt(data.sumPersons);
+        if('' == '1'){
+            sumPersons = 8;
+        }
+
+        var opening = data.opening;
+        if(opening.is_open == 1) {
+
+            $('.closed_description').slideUp(133);
+            $('.timeslots').slideDown(333);
+            $('button.btn.next').show();
+
+        } else{
+            $('.timeslots').slideUp(133);
+            $('.closed_description').slideDown(333);
+            $('button.btn.next').hide();
+        }
+        var locked = data.locked;
+
+        var data = data.timeslots;
+
+        $('.timeslot').remove();
+        $('.timeslots .alert').remove();
+        var html = '';
+        $('.dropdown-menu a').off('click');
+        for(var i = 0; i < sumPersons;i++) {
+            var cnt = i+1;
+            html = html + '<li> <a data-num="'+cnt+'">'+cnt+' Person</a> </li>';
+        }
+        $('.persons-listing').html(html);
+        $('.dropdown-menu a').on("click",function() {
+
+            $('.widget-persons').text($(this).text());
+            $('input[name=persons]').val($(this).data('num'));
+            $(this).closest('.num').find('.dropdown-toggle').text($(this).data('num') + ' Pers.');
+
+            loadTimeSlots();
+
+        });
+
+
+
+        $.each(data, function(key, item) {
+        
+        var _item = $('<a  class="timeslot list-group-item" data-time="' + item.value + '">' + item.value + ' </a>');
+        
+        if(item.enabled) {
+          
+          _item.addClass('available');
+          _item.on("click",function() {
+             $('.timeslot').removeClass('active');
+             $('button.next').removeAttr('disbabled').addClass('btn-primary');
+             $('input[name=time]').val($(this).data('time'));
+             $(this).addClass('active');
+	   });
+	   
+	} else {
+	  
+	  _item.addClass('disabled');
+	  // reset selected time
+	  if($('input[name=time]').val() == item.value) {
+	    $('input[name=time]').val('');
+	    $('button.next').attr('disbabled', 'disbabled').removeClass('btn-primary');
+	  }
+	  
+	}
+	
+	_item.append('<span>' + item.label + '</span>');
+	
+        $('.timeslots').append(_item);
+        
+      });
+      
+      // closed
+
+      if(data.length == 0) {
+          if(locked.description != undefined) {
+
+              $('.timeslots').html($('<div class="alert alert-info" role="alert">'+locked.description+'</div>'));
+
+          } else{
+              $('.timeslots').html($('<div class="alert alert-info" role="alert"></div>'));
+          }
+
+        $('input[name=time]').val('');
+	$('button.next').attr('disbabled', 'disbabled').removeClass('btn-primary');
+      }
+
+      if($('input[name=time]').val())
+        $('a[data-time="' + $('input[name=time]').val() + '"]').addClass('active');
+      
+    });
+    
+  };
+  
+  
+  $('#form-reservation').on('submit',function(event) {
+    
+    event.preventDefault(); // Prevent the form from submitting via the browser
+    var form = $(this);
+    
+    form.append($('<input type="hidden" name="token" value="1" />'));
+
+    // Fallback, beim Absenden wird das Datum auf Format geprüft und in ISO gesendet oder wenn leer
+    var newDate = $('#date').val();
+    if(newDate == ''){
+        newDate = moment(new Date()).format('YYYY-MM-DD');
+    }
+    if(moment(newDate, 'DD.MM.YYYY', true).isValid()){
+        newDate = moment(newDate, 'DD.MM.YYYY', true).format('YYYY-MM-DD');
+    }
+
+    $('input[name="date"]').val(newDate);
+    var data = $('#form-reservation').serialize();
+    
+    $.ajax({
+      type: form.attr('method'),
+      url: form.attr('action'),
+      data: data
+    }).done(function(data) {
+
+      var data = jQuery.parseJSON(data);
+      
+      if(data.message) {
+        
+        $('.booking-complete').show();
+        
+        $('.booking-complete .alert').removeClass('alert-danger').removeClass('alert-success').addClass('alert-' + data.message_type);
+        $('.booking-complete .alert').text(data.message);
+
+
+       $('.booking-complete').append(data.html);
+        
+       $('.contact-information').hide();
+	   $('.booking-details').hide();
+        
+      }
+      
+    }).fail(function(data) {
+      // Optionally alert the user of an error here...
+        console.log('failed');
+    });
+    
+    
+  });
+  
+  // solte bereits im Header gesetzt werden
+    $.datepicker.setDefaults({'dateFormat':'dd.mm.yy'});
+  
+  $('.btn-date-picker').on("click", function(e) {
+    
+    $('.timeslots').hide();
+    $('#date').show();
+    
+    var dateToday = new Date();
+    
+    $('#date').datepicker({
+       
+       minDate: dateToday,
+    dateFormat:'dd.mm.yy',
+       onSelect: function(dateText, inst) {
+       
+         $('.date-value').text(dateText);
+         $('input[name="date"]').val(dateText);
+         
+         loadTimeSlots();
+         
+         $('#date').hide();
+         $('.timeslots').show();
+         
+       }
+       
+     }
+    );
+    $('.ui-datepicker').addClass('notranslate');
+    
+  });
+        // Init einen Trigger für die passende Formatierung
+    $('.btn-date-picker').trigger('click'); $('.ui-datepicker-today').trigger('click');
+});
+</script>
+  <style>
+
+
+#date  div {
+    width: 320px;
+    height: auto;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.5);
+    margin: 0px;
+}
+
+.timeslots .timeslot {
+  overflow: hidden;
+}
+
+.timeslots  {
+  height: 300px;
+}
+</style>
+  <div id="page">
+    <div id="header">
+      <h2>Tischreservierung</h2>
+    </div>
+    <div class="booking-complete" style="display: none;">
+      <div class="alert" role="alert"></div>
+      <br />
+      <button class="btn btn-default back">Weitere Reservierung</button>
+    </div>
+    <div class="booking-details present">
+      <div>
+        <div>
+          <div class="wrapper">
+            <div class="num-date">
+              <div class="num btn-group">
+                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">2 Pers.
+		    <b class="caret"></b></a>
+                <ul class="dropdown-menu persons-listing">
+                  <li>
+                    <a data-num="1">1 Person</a>
+                  </li>
+                  <li>
+                    <a data-num="2">2 Personen</a>
+                  </li>
+                  <li>
+                    <a data-num="3">3 Personen</a>
+                  </li>
+                  <li>
+                    <a data-num="4">4 Personen</a>
+                  </li>
+                  <li>
+                    <a data-num="5">5 Personen</a>
+                  </li>
+                  <li>
+                    <a data-num="6">6 Personen</a>
+                  </li>
+                  <li>
+                    <a data-num="7">7 Personen</a>
+                  </li>
+                  <li>
+                    <a data-num="8">8 Personen</a>
+                  </li>
+                  <li>
+                    <a data-num="9">9 Personen</a>
+                  </li>
+                  <li>
+                    <a data-num="10">10 Personen</a>
+                  </li>
+                  <li>
+                    <a data-num="11">11 Personen</a>
+                  </li>
+                  <li>
+                    <a data-num="12">12 Personen</a>
+                  </li>
+                  <li>
+                    <a data-num="13">13 Personen</a>
+                  </li>
+                  <li>
+                    <a data-num="14">14 Personen</a>
+                  </li>
+                  <li>
+                    <a data-num="15">15 Personen</a>
+                  </li>
+                  <li>
+                    <a data-num="16">16 Personen</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="btn-group btn-date">
+                <a class="btn btn-default btn-date-picker">
+                  <span class="date-value">Heute</span>
+                  <b class="caret"></b>
+                </a>
+              </div>
+            </div>
+            <div style="padding: 10px 0px;">
+              <div id="date"></div>
+              <div class="closed_description" style="display:none">
+                <h2>Wir haben leider geschlossen</h2>
+                <p>Unsere Öffnungszeiten:</p>
+                <ul style="list-style:none;">
+                  <li>
+                    <div class="col-md-2">
+                      <b style="min-width: 80px;float: left;">Montag</b>
+                    </div>
+                    <div class="col-md-10" style="    margin-bottom: 5px;">Geschlossen</div>
+                  </li>
+                  <li></li>
+                  <li>
+                    <div class="col-md-2">
+                      <b style="min-width: 80px;float: left;">Dienstag</b>
+                    </div>
+                    <div class="col-md-10" style="    margin-bottom: 5px;"><br /> 16:00 - 20:00
+                                                  </div>
+                  </li>
+                  <li></li>
+                  <li>
+                    <div class="col-md-2">
+                      <b style="min-width: 80px;float: left;">Mittwoch</b>
+                    </div>
+                    <div class="col-md-10" style="    margin-bottom: 5px;"><br /> 16:00 - 20:00
+                                                  </div>
+                  </li>
+                  <li></li>
+                  <li>
+                    <div class="col-md-2">
+                      <b style="min-width: 80px;float: left;">Donnerstag</b>
+                    </div>
+                    <div class="col-md-10" style="    margin-bottom: 5px;"><br /> 16:00 - 20:00
+                                                  </div>
+                  </li>
+                  <li></li>
+                  <li>
+                    <div class="col-md-2">
+                      <b style="min-width: 80px;float: left;">Freitag</b>
+                    </div>
+                    <div class="col-md-10" style="    margin-bottom: 5px;"><br /> 16:00 - 20:00
+                                                  </div>
+                  </li>
+                  <li></li>
+                  <li>
+                    <div class="col-md-2">
+                      <b style="min-width: 80px;float: left;">Samstag</b>
+                    </div>
+                    <div class="col-md-10" style="    margin-bottom: 5px;"><br /> 16:00 - 20:00
+                                                  </div>
+                  </li>
+                  <li></li>
+                  <li>
+                    <div class="col-md-2">
+                      <b style="min-width: 80px;float: left;">Sonntag</b>
+                    </div>
+                    <div class="col-md-10" style="    margin-bottom: 5px;">Geschlossen</div>
+                  </li>
+                </ul>
+              </div>
+              <div class="timeslots list-group" style="overflow: auto;display:block;">
+                <a href="" data-time="Für heute sind Reservierungen online nicht mehr möglich." class="timeslot list-group-item disabled">
+                        Für heute sind Reservierungen online nicht mehr möglich. <span></span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="actions form-group">
+          <button class="btn next" disbabled="disbabled" style="float: right;">Jetzt reservieren</button>
+        </div>
+      </div>
+      <div class="contact-details future"></div>
+    </div>
+    <div class="contact-information col-sm-12" style="display: none;">
+      <form class="form-horizontal" method="post" action="/tischreservierung/" id="form-reservation">
+        <div class="alert alert-info" role="alert" style="margin-right: -15px; margin-left: -15px;">
+          <span class="widget-persons"></span>
+          <br />
+          <span class="widget-date"></span>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="first_name" value="" placeholder="Vorname" required="required" autocomplete="given-name" />
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="name" value="" placeholder="Name" required="required" autocomplete="family-name" />
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" name="email" value="" placeholder="E-Mail" required="required" autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="mobile" value="" placeholder="Telefon" required="required" autocomplete="tel" />
+        </div>
+        <div class="form-group">
+          <textarea type="text" class="form-control" name="remark" placeholder="Kommentar"></textarea>
+        </div>
+        <div class="form-group newsletter-subscribe">
+          <label><input type="checkbox" name="newsletter_subscribe" checked="checked" /> Ja, ich möchte persönliche Angebote erhalten.
+	    </label>
+        </div>
+        <div class="form-group">
+          <label for="policy_acepted"><input type="checkbox" name="policy_acepted" id="policy_acepted" required="required" /><div>Ich habe die <a href="https://www.seehotel-louise.de/j/shop/terms" target="_blank">allgemeinen Geschäftsbedingungen</a> und die <a href="https://www.seehotel-louise.de/j/privacy" target="_blank">Datenschutzerklärung</a> gelesen und akzeptiert.</div></label>
+        </div>
+        <style>.CC {display:none;}</style>
+        <div class="actions form-group">
+          <input type="reset" class="btn btn-default back" value="Zurück" />
+          <input type="submit" class="btn confirm btn-primary" value="Reservieren" style="float: right;" />
+        </div>
+        <input type="text" name="CC" value="" class="form-control CC" />
+        <input type="hidden" name="time" value="" />
+        <input type="hidden" name="persons" value="2" />
+        <input type="hidden" name="date" value="2023-05-04" />
+      </form>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function() {
+
+        $('#policy_acepted').next('div').css('transition','all 0.3s ease-in').css('white-space','pre');
+        $('input.btn.confirm.btn-primary').on("click",function(event) {
+
+            if($('.CC').val() != ''){
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
+
+            if($('#policy_acepted').is(':checked') == false){
+
+                $('html, body').animate({
+                    scrollTop: $("#policy_acepted").offset().top
+                }, 200);
+                $('#policy_acepted').next('div').css('transition','all 0.3s ease-in').css('white-space','pre').css('color','red').delay(2050).queue(function() {
+                    $('#policy_acepted').next('div').css('color','black')
+                    $(this).dequeue();
+                });
+                event.preventDefault();
+                event.stopPropagation();
+            } else if($('#storno_acepted').length > 0 && $('#storno_acepted').is(':checked') == false) {
+                $('html, body').animate({
+                    scrollTop: $("#policy_acepted").offset().top
+                }, 200);
+                $('#storno_acepted').next('div').css('transition','all 0.3s ease-in').css('white-space','pre').css('color','red').delay(2050).queue(function() {
+                    $('#storno_acepted').next('p').css('color','black')
+                    $(this).dequeue();
+                });
+
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        });
+    });
+    </script>
+</div></div></div><div class="content-footer"></div></main><footer class="tmpl-footer"><div id="footer" class="row"></div><div class="row"><div style="text-align: center; color: #B5C2CF; font-size: 10px;" class="col-xs-12"><a style="color: inherit; font-size: inherit;" href="https://www.swoppen.com/de/hotelsoftware/" target="_blank">Hotelsoftware</a>
+            -
+            <a style="color: inherit; font-size: inherit;" href="https://www.swoppen.com/" target="_blank" title="Swoppen Systems - Webbasierte E-Business-Lösungen">Swoppen Systems</a></div></div></footer><script>
+$(document).ready(function(){
+$('.or-box.part-2x>.or-box-title').html('<b>1.</b> Promocode/Gutschein einlösen')
+
+$('.anr,.anreise').html('<option value=""></option>');
+$('.anr').hide();
+
+$('.loign-li').after('<div class="logo"><img src="/data/HP/seehotel.png" class="img-logo img-responsive" /></div>');
+$('.gn-menu a').on('click',function(){
+if($(this).attr('href') != undefined || $(this).attr('href') == '') {
+  window.location.href = $(this).attr('href');
+}
+
+});
+$('.isPreText').text('Die Reservierung ist feststehend und wir rechnen mit Ihrer Ankunft. Das Zimmer wird bis zu Ihrer Ankunft für Sie vorbehalten. Sie wickeln die Bezahlung direkt im nächsten Schritt ab.');
+$('.noPreText').text('Das gebuchte Zimmer wird bis um 18 Uhr am Anreisetag für Sie vorbehalten. Sollte die Ankunft nicht rechtzeitig erfolgen, so kann das Hotel das Zimmer für anderweitige Zwecke verwenden. Sie bezahlen vor Ort.');
+
+$('.PPP img').attr('src','/soferu/templates/images/payments/paypal_plus_banner.jpg');
+$('a.gn-icon.gn-icon-map').attr('href','https://www.seehotel-louise.de/kontakt/');
+$('.form-check.form-check-inline.noPreButton h5').text('Nicht Garantierte Reservierung - Die Reservierung wird bis um 18:00 Uhr erhalten ');
+$('.chosen_childs').parent().hide();
+
+})
+</script><script src="/soferu/templates/HP/online-reservierung3/js/sweetalert2.js"></script><script src="/soferu/templates/HP/online-reservierung3/js/classie.js"></script><script src="/soferu/templates/HP/online-reservierung3/js/gnmenu.js"></script><script>
+        if($('.gn-menu').length > 0){
+          new gnMenu( document.getElementById( 'gn-menu' ) );
+        }
+      </script><script>
+        $(document).ready(function(){
+// slides up all submenus on load
+          $(document).ready(function () {
+            $('#MainMenu > li > ul').slideUp(); // slide up other elements
+          });
+
+//toggle function
+          $(function () {
+            $('#MainMenu > li').click(function (e) { // limit click to children of mainmenue
+              var $el = $('ul', this); // element to toggle
+              $('#MainMenu > li > ul').not($el).slideUp(); // slide up other elements
+              $el.stop(true, true).slideToggle(400); // toggle element
+              return false;
+            });
+            $('#MainMenu > li > ul > li').click(function (e) {
+              e.stopPropagation(); // stop events from bubbling from sub menu clicks
+            });
+          });
+
+          $(".hover-languages").hover(
+                  function () {
+                    $(this).parent().children('ul').stop(true,true).slideDown( 500 );
+                  },
+                  function () {
+                    $(this).parent().children('ul').stop(true,true).slideUp( 500 );
+                  }
+          );
+          var delay=500, setTimeoutConst;
+          $(".loign-li").hover(
+                  function () {
+                    var elm = $(this);
+                    setTimeoutConst = setTimeout(function() {
+                      elm.children('.login-container').stop(true,true).slideDown( 500 );
+                    }, delay);
+
+                  },
+                  function () {
+                    clearTimeout(setTimeoutConst);
+                    $(this).children('.login-container').stop(true,true).slideUp( 500 );
+                  }
+          );
+
+
+        });
+
+        </script><script>
+
+
+        function scrollStep(step) {
+
+          if(step.length == 0)
+            return false;
+          /*$([document.documentElement, document.body]).animate({
+              scrollTop: step.offset().top -70
+          }, 400); */
+          var offset = 0;
+          // MENÜ plus STEPS MENÜ OFFSET CALCEN
+          if($('.gn-menu-main').length != 0){
+            offset += $('.gn-menu-main').height();
+          }
+
+          if($('.gui.steps.withMenu').length != 0){
+            offset += $('.gui.steps.withMenu').height();
+          }
+
+          if(offset == 0){
+            offset = 70;
+          }
+
+
+          $('html,body').animate({scrollTop: step.offset().top-offset}).trigger('scroll');
+          $(window).trigger('scroll');
+        }
+
+      </script></body>
+</html>
